@@ -21,4 +21,6 @@ public interface IUserDAO {
     public void insertUserStore(User user) throws SQLException;
 
     List<User> findByName(String nameSearch);
+
+    public List<User> sortByName();
 }

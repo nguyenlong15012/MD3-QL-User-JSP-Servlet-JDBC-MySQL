@@ -39,6 +39,8 @@ public class UserServlet extends HttpServlet {
                 case "search":
                     searchByName(request, response);
                     break;
+
+
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -51,6 +53,14 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("listUser", userList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void sortByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> userList=userDAO.sortByName();
+        request.setAttribute("listUser", userList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+        dispatcher.forward(request, response);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -70,6 +80,9 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "delete":
                     deleteUser(request, response);
+                    break;
+                case "sort":
+                    sortByName(request,response);
                     break;
                 default:
                     listUser(request, response);
@@ -112,8 +125,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String country = request.getParameter("country");
         User newUser = new User(name, email, country);
-        //userDAO.insertUser(newUser);
-        userDAO.insertUserStore(newUser);
+        userDAO.insertUser(newUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
         dispatcher.forward(request, response);
     }

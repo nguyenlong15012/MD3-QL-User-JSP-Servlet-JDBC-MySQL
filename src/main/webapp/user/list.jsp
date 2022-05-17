@@ -9,12 +9,14 @@
 <center>
     <h1>User Management</h1>
     <h2>
-        <a href="/users?action=create">Add New User</a>
+        <a href="/users?action=create">Add New User</a> <br>
+        <a href="/users?action=sort">Sort By Name</a>
     </h2>
     <form action="/users?action=search" method="post">
         <input type="text" name="name" placeholder="Search by Name">
         <button type="submit">Search</button>
     </form>
+
     <form action="/users?action=create">
         <input type="text" name="id" size="45" >
         <input type="submit" value="send">
